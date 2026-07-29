@@ -1,4 +1,3 @@
-# retro-8bit-beatmaker
 # Retro 8-Bit Beatmaker
 
 A simple drum machine and chiptune synthesizer that runs entirely in the browser. You can use your keyboard to play retro 8-bit sounds.
