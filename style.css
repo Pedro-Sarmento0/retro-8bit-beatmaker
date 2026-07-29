@@ -58,3 +58,24 @@ p {
 .pad:hover {
     border-color: #05d9e8;
 }
+
+.pad.playing {
+    transform: translateY(6px);
+    box-shadow: 0 0px 0 #002b3d;
+    border-color: #ff2a6d;
+    background: #2a1b2d;
+    box-shadow: 0 0 20px #ff2a6d;
+}
+
+.key {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #05d9e8;
+    margin-bottom: 8px;
+}
+
+.sound-name {
+    font-size: 0.8rem;
+    color: #a0a0a0;
+    text-transform: uppercase;
+}
