@@ -17,11 +17,11 @@ function playRetroSound(soundType) {
 
     //Select which sound to sunthesize based on the HTML data attribute
     switch (soundType) {
-        case 'kikc': //deep kick drum
+        case 'kick': //deep kick drum
             osc.type = 'sine';
             osc.frequency.setValueAtTime(150, now);
             osc.frequency.exponentialRampToValueAtTime(0.01, now + 0.3);
-            gain.gain.setTargetAtTime(1, now);
+            gain.gain.setValueAtTime(1, now);
             gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
             osc.start(now);
             osc.stop(now + 0.3);
@@ -29,7 +29,7 @@ function playRetroSound(soundType) {
 
         case 'laser': //arcade spaceship laser shot
             osc.type = 'sawtooth';
-            osc.frequency.setTargetAtTime(880, now);
+            osc.frequency.setValueAtTime(880, now);
             osc.frequency.exponentialRampToValueAtTime(110, now + 0.2);
             gain.gain.setValueAtTime(0.5, now);
             gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
@@ -55,6 +55,30 @@ function playRetroSound(soundType) {
             gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
             osc.start(now);
             osc.stop(now + 0.2);
+            break;
+
+        case 'synth1': //simple synth note (C4)
+            playNote(261.63, 'square', 0.3);
+            break;
+        case 'synth2': //simple synth note (E4)
+            playNote(329.63, 'square', 0.3);
+            break;
+        case 'synth3': //simple synth note (G4)
+            playNote(392.00, 'square', 0.3);
+            break;
+        
+        case 'powerup': //level up / power up sound
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(330, now);
+            osc.frequency.setValueAtTime(392, now + 0.1);
+            osc.frequency.setValueAtTime(659, now + 0.2);
+            osc.frequency.setValueAtTime(523, now + 0.3);
+            osc.frequency.setValueAtTime(587, now + 0.4);
+            osc.frequency.setValueAtTime(784, now + 0.5);
+            gain.gain.setValueAtTime(0.4, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
+            osc.start(now);
+            osc.stop(now + 0.7);
             break;
     }
 }
