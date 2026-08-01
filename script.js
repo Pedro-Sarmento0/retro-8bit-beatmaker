@@ -2,7 +2,7 @@
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
 
-//fuction that synthesizes sounds in real-time
+//function that synthesizes sounds in real-time
 function playRetroSound(soundType) {
     if (audioCtx.state === 'suspended') {
         audioCtx.resume();
@@ -15,7 +15,7 @@ function playRetroSound(soundType) {
     osc.connect(gain);
     gain.connect(audioCtx.destination);
 
-    //Select which sound to sunthesize based on the HTML data attribute
+    //Select which sound to synthesize based on the HTML data attribute
     switch (soundType) {
         case 'kick': //deep kick drum
             osc.type = 'sine';
@@ -81,4 +81,35 @@ function playRetroSound(soundType) {
             osc.stop(now + 0.7);
             break;
     }
+}
+
+//helper function to play standard musical notes
+function playNote(freq, type, duration) {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    const now = audioCtx.currentTime;
+
+    osc.type = type;
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(0.3, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + duration);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + duration);
+
+}
+
+//function to trigger pad animations and sounds
+function triggerPad(padElement) {
+    const sound = padElement.getAttribute('data-sound');
+    playRetroSound(sound);
+
+    padElement.classList.add('playing');
+
+    setTimeout(() => {
+        padElement.classList.remove('playing');
+    }, 150);
 }
