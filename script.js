@@ -113,3 +113,21 @@ function triggerPad(padElement) {
         padElement.classList.remove('playing');
     }, 150);
 }
+
+//1) listen for mouse clicks on the pads
+const pads = document.querySelectorAll('.pad');
+pads.forEach(pad => {
+    pad.addEventListener('click', () => {
+        triggerPad(pad);
+    });
+});
+
+//2) listen for keyboard presses
+window.addEventListener('keydown', (event) => {
+    const key = event.key.toLowerCase();
+    const pad = document.querySelector(`.pad[data-key="${key}"]`);
+
+    if (pad) {
+        triggerPad(pad);
+    }
+});
